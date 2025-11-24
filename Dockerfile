@@ -5,12 +5,12 @@ WORKDIR /app
 # Copy client package files
 COPY client/package*.json ./client/
 # Install client dependencies
-RUN cd client && npm install
+RUN cd client && npm ci
 
 # Copy server package files
 COPY server/package*.json ./server/
 # Install server dependencies
-RUN cd server && npm install
+RUN cd server && npm ci
 
 # Copy source code
 COPY client ./client
