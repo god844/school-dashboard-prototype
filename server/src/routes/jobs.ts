@@ -15,7 +15,7 @@ router.post('/', async (req, res) => {
         }
 
         const createdJobs = await Promise.all(
-            jobs.map((job) =>
+            jobs.map((job: any) =>
                 prisma.job.create({
                     data: {
                         batchId,
@@ -43,7 +43,7 @@ router.get('/', async (req, res) => {
         });
 
         // Parse JSON data back to object
-        const parsedJobs = jobs.map((job) => ({
+        const parsedJobs = jobs.map((job: any) => ({
             ...job,
             data: JSON.parse(job.data),
         }));
