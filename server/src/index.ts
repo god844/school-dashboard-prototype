@@ -5,11 +5,25 @@ import { PrismaClient } from '@prisma/client';
 import path from 'path';
 import jobsRouter from './routes/jobs';
 
+import fs from 'fs';
+
 dotenv.config();
 
 const app = express();
 const prisma = new PrismaClient();
 const PORT = process.env.PORT || 3001;
+
+console.log('--- DEBUG START ---');
+console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
+console.log(`PORT: ${PORT}`);
+console.log(`__dirname: ${__dirname}`);
+const clientDistPath = path.join(__dirname, '../../client/dist');
+console.log(`Client Dist Path: ${clientDistPath}`);
+console.log(`Path exists: ${fs.existsSync(clientDistPath)}`);
+if (fs.existsSync(clientDistPath)) {
+    console.log(`Contents: ${fs.readdirSync(clientDistPath).join(', ')}`);
+}
+console.log('--- DEBUG END ---');
 
 app.use(cors());
 app.use(express.json());
